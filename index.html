@@ -4,22 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Expense Tracker App</title>
+  <title>MoneyFlow</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <link rel="icon" href="fa6-solid--money-bill-transfer.svg">
 </head>
-
 <body>
 
   <div class="tracker-app">
 
     <header class="tracker-header">
-      <h1 class="tracker-header__title">Tracker<span style="color:var(--accent-blue)">.io</span></h1>
+      <h1 class="tracker-header__title">
+        Money<span style="color:var(--color-income)">Flow</span>
+        <br>
+        <span class="tracker-header__tagline">Personal Finance Tracker</span>
+      </h1>
+
       <div class="tracker-header__user">
         <div class="tracker-header__user-info">
           <!-- TODO: Ganti "Siswa Front-End" dengan Nama Lengkap dan Username Dicoding kamu.
               Contoh: Halo, <strong>Budi (bdi002)</strong> -->
-          <span class="tracker-header__greeting">Halo, <strong></strong></span>
+          <span class="tracker-header__greeting">Hi, <strong></strong></span>
           <span class="tracker-header__date"></span>
         </div>
         <div class="tracker-header__avatar" role="img" aria-label="Avatar Pengguna" aria-hidden="true">👤</div>
@@ -31,7 +36,7 @@
         <h2 id="summary-heading" class="visually-hidden">Ringkasan Keuangan</h2>
 
         <div class="tracker-summary__balance">
-          <h3 class="tracker-summary__label">Saldo Saat Ini</h3>
+          <h3 class="tracker-summary__label">Saldo</h3>
           <div class="tracker-summary__balancee">
             <i class="ti ti-wallet"></i>
             <p class="tracker-summary__balance-amount">Rp 0</p>
@@ -57,7 +62,7 @@
 
       <section class="tracker-form-section" aria-labelledby="form-heading">
         <div class="tracker-form-section__card">
-          <h2 id="form-heading" class="tracker-form-section__heading">Tambah Pencatatan Baru</h2>
+          <h2 id="form-heading" class="tracker-form-section__heading">Tambah Catatan Baru</h2>
 
           <form id="transactionForm" data-testid="transactionForm" class="tracker-form">
             <div class="tracker-form__field">
@@ -128,7 +133,7 @@
     </main>
 
     <footer class="tracker-footer">
-      <p>&#169; 2026 Tracker.io. Disusun sebagai Starter Project Submission Front-End Web.</p>
+      <p>&#169; 2026 MoneyFlow. Disusun sebagai Starter Project Submission Front-End Web.</p>
     </footer>
 
   </div>
