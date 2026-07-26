@@ -24,6 +24,7 @@ function generateId() {
 
 const pemasukan = document.getElementById('incomeList');
 const pengeluaran = document.getElementById('expenseList');
+document.getElementById('transactionFormDateInput').required = true;
 
 /**
  * TODO [Basic]:
@@ -87,7 +88,7 @@ function createTransactionElement(transaction) {
     const button1 = document.createElement('button');
     button1.setAttribute('data-testid', 'transactionItemUbahTypeButton');
     button1.classList.add('btn', 'btn--ubah');
-    button1.innerText = 'Ubah';
+    button1.innerHTML = '<i class="ti ti-arrows-exchange"></i>';
     button1.addEventListener('click', () => {
         transaction.type = transaction.type === 'income' ? 'expense' : 'income';
         saveToStorage();
@@ -98,7 +99,7 @@ function createTransactionElement(transaction) {
     const button2 = document.createElement('button');
     button2.setAttribute('data-testid', 'transactionItemEditTypeButton');
     button2.classList.add('btn', 'btn--edit');
-    button2.innerText = 'Edit';
+    button2.innerHTML = '<i class="ti ti-edit"></i>';
     button2.addEventListener('click', () => {
         document.getElementById('transactionFormTitleInput').value = transaction.title;
         document.getElementById('transactionFormAmountInput').value = transaction.amount;
@@ -107,13 +108,14 @@ function createTransactionElement(transaction) {
         const simpan = document.querySelector('.tracker-form__submit');
         simpan.innerText = 'Update';
         editingId = transaction.id;
+        document.getElementById('transactionFormTitleInput').focus();
     });
     wew.appendChild(button2);
 
     const button3 = document.createElement('button');
     button3.setAttribute('data-testid', 'transactionItemDeleteButton');
     button3.classList.add('btn', 'btn--hapus');
-    button3.innerText = 'Hapus';
+    button3.innerHTML = '<i class="ti ti-trash"></i>';
     button3.addEventListener('click', () => {
         const hapus = transaksi.filter(item => item.id !== transaction.id);
         transaksi = hapus;
@@ -136,7 +138,9 @@ function renderTransactions(data = transaksi) {
     pemasukan.innerHTML = '';
     pengeluaran.innerHTML = '';
 
-    for (const transaction of data) {
+    const dataUrut = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    for (const transaction of dataUrut) {
         const baru = createTransactionElement(transaction);
         if (transaction.type === 'income')
             pemasukan.appendChild(baru);
@@ -298,8 +302,6 @@ formSearch.addEventListener('input', () => {
     renderTransactions(cocok);
 });
 
-
-const greeting = document.querySelector('.tracker-header__greeting strong');
 const bulanElement = document.querySelector('.tracker-header__date');
 
 const namaBulan = [
@@ -310,7 +312,23 @@ const namaBulan = [
 const sekarang = new Date();
 bulanElement.textContent = namaBulan[sekarang.getMonth()];
 
-const tamu = prompt('Siapakah Anda?');
-alert('Selamat datang ' + tamu + '!');
+const greeting = document.querySelector('.tracker-header__greeting strong');
 
-greeting.textContent = tamu;
+function ambilNamaUser() {
+    const namaTersimpan = localStorage.getItem('nama');
+
+    if (namaTersimpan !== null) {
+        greeting.textContent = namaTersimpan;
+        return;
+    }
+
+    let user = prompt('Siapakah Anda?');
+    if (user === null || user.trim() === '') {
+        return false;
+    }
+
+    localStorage.setItem('nama', user);
+    greeting.textContent = user;
+}
+
+ambilNamaUser();
